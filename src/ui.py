@@ -43,6 +43,22 @@ def print_input_line() -> str:
     return input('> ')
 
 
+def show_command_preview(command: str) -> str:
+    """Display command and get user confirmation"""
+    if not command:
+        return ""
+    
+    print()
+    print(command)
+    print()
+    
+    try:
+        user_input = input("Execute? [y/N]: ").strip()
+        return command if user_input.lower() in ['y', 'yes'] else ""
+    except KeyboardInterrupt:
+        return ""
+
+
 def show_spinner(process: subprocess.Popen) -> None:
     spinner = Spinner()
     spinner.show(process)

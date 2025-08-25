@@ -21,7 +21,10 @@ def main(args: list[str]) -> str:
         f'{ollama_path} run {model_name} --nowordwrap',
         input=prompt)
     command = parser.extract_first_code_block(model_output)
-    return command
+    
+    # Show command preview and get user confirmation
+    confirmed_command = ui.show_command_preview(command)
+    return confirmed_command
 
 
 def handle_result(args: list[str], answer: str, target_window_id: int, boss: Boss) -> None:
